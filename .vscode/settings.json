@@ -1,0 +1,21 @@
+{
+	"TORADEX": {
+		/* Target Device Settings */
+		"TARGET_IP":"192.168.0.141",
+
+		/* Project Settings */
+		"PROGRAM":"hello.bin",
+
+		/* Yocto SDK Configuration */
+		"ARCH":"arm-tdx-linux-gnueabi",
+		"OECORE_NATIVE_SYSROOT":"/opt/tdx-xwayland/5.6.0/sysroots/x86_64-tdxsdk-linux",
+		"SDKTARGETSYSROOT": "/opt/tdx-xwayland/5.6.0/sysroots/armv7at2hf-neon-tdx-linux-gnueabi",
+		"SETUPSCRIPT": "/opt/tdx-xwayland/5.6.0/environment-setup-armv7at2hf-neon-tdx-linux-gnueabi",
+		
+		/* Yocto SDK Constants */
+		"CC_PREFIX": "${config:TORADEX.OECORE_NATIVE_SYSROOT}/usr/bin/${config:TORADEX.ARCH}/${config:TORADEX.ARCH}-",
+		"CC_SUFIX": "-march=armv7-a -mthumb -mfpu=neon -mfloat-abi=hard -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=$SDKTARGETSYSROOT --sysroot=${config:TORADEX.SDKTARGETSYSROOT}",
+		"CXX": "${config:TORADEX.CC_PREFIX}g++ ${config:TORADEX.CC_SUFIX}",
+		"CC": "${config:TORADEX.CC_PREFIX}gcc ${config:TORADEX.CC_SUFIX}"
+	}
+}

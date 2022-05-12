@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "TDX_SDK",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${config:TORADEX.SDKTARGETSYSROOT}/usr/include/**",
+
+            ],
+            "defines": ["FOO", "BAR=100"],
+            "compilerPath": "${config:TORADEX.CXX}",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**",
+                    "${config:TORADEX.SDKTARGETSYSROOT}/usr/include/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+              }
+        }
+    ],
+    "version": 4
+}
