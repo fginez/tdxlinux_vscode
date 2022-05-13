@@ -1,8 +1,5 @@
 {
 	"TORADEX": {
-		/* Target Device Settings */
-		"TARGET_IP":"192.168.0.141",
-
 		/* Project Settings */
 		"PROGRAM":"hello.bin",
 
