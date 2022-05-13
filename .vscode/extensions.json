@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "augustocdias.tasks-shell-input",
+        "mikestead.dotenv",
+        "ms-vscode.cpptools",
+        "vadimcn.vscode-lldb"
+    ]
+}

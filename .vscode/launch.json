@@ -1,24 +1,55 @@
 {
     "version": "0.2.0",
-    "configurations": [{
-        "name": "GDB debug",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${config:TDX_SDK.PROGRAM}",
-        "args": [],
-        "stopAtEntry": true,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "console": "integratedTerminal",
-        "MIMode": "gdb",
-        "targetArchitecture": "arm64",
-        "preLaunchTask": "var-deploy-gdb",
-        "setupCommands": [{
-            "description": "Enable pretty-printing for gdb",
-            "text": "-enable-pretty-printing",
-            "ignoreFailures": true
-        }],
-        "miDebuggerPath": "/usr/bin/gdb-multiarch",
-        "miDebuggerServerAddress": "${config:TDX_SDK.TARGET_IP}:3000",
-    }]
+    "inputs": [
+        {
+            "id": "TARGET_IP",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "cat .env | grep TARGET_IP= | cut -d '=' -f2",
+                "useSingleResult": true
+            }
+        },
+        {
+            "id": "TARGET_USER",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "cat .env | grep TARGET_USER= | cut -d '=' -f2",
+                "useSingleResult": true
+            }
+        },
+        {
+            "id": "TARGET_PASS",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "cat .env | grep TARGET_PASS= | cut -d '=' -f2",
+                "useSingleResult": true
+            }
+        },
+        {
+            "id": "GDB_PORT",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "cat .env | grep GDB_PORT= | cut -d '=' -f2",
+                "useSingleResult": true
+            }
+        }
+    ],
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "custom",
+            "name": "Remote debug",
+            "preLaunchTask": "remote_debug_setup",
+            "targetCreateCommands": [
+                "target create ${workspaceFolder}/${config:TORADEX.PROGRAM}"
+            ],
+            "processCreateCommands": [
+                "gdb-remote ${input:TARGET_IP}:${input:GDB_PORT}"
+            ]
+        }
+    ]
 }

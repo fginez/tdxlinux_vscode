@@ -1,3 +1,5 @@
+#!make
+
 INC_BASE=$(SDKTARGETSYSROOT)/usr/include/
 INC_USBGX=$(INC_BASE)usbgx
 

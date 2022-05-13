@@ -16,27 +16,6 @@
         "showReuseMessage": true,
     },
     "tasks": [
-        /* Configure launch.json (debug) preLaunchTask Task */
-        {
-            "label": "var-deploy-gdb",
-            "isBackground": true,
-            "problemMatcher":{
-                "base": "$gcc",
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern":  "Deploying to target",
-                    "endsPattern":  "Starting GDB Server on Target"
-                }
-            },
-            "type": "shell",
-            "command": "sh",
-            "args": [
-                "var-deploy-gdb.sh",
-                "${config:TDX_SDK.TARGET_IP}",
-                "${config:TDX_SDK.PROGRAM}"
-            ],
-            "dependsOn": ["build"],
-        },        
         /* Configure Build Task */
         {
             "label": "build",
@@ -44,5 +23,18 @@
             "command": "source ${config:TORADEX.SETUPSCRIPT}; make clean; make -j$(nproc)",
             "problemMatcher": ["$gcc"]
         },
+        /* Setup remote debug */
+        {
+            "label": "remote_debug_setup",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "${workspaceFolder}/scripts/remote_debug_setup.sh",
+                "${config:TORADEX.PROGRAM}"
+            ],
+            "dependsOn": [
+                "build"
+            ]
+        }
     ]
 }
